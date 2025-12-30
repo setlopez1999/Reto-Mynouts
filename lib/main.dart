@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         
       ),
-      routerConfig: appRouter,
+      routerConfig: appRouter,// mandamos la configuración del router
       
     );
   }

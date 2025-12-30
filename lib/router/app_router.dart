@@ -7,21 +7,21 @@ import '../presentation/screens/note_form_screen.dart';
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [
-    // Ruta 1: Home - Lista de notas
+    // al home - Lista de notas
     GoRoute(
       path: '/',
       name: 'home',
       builder: (context, state) => const HomeScreen(),
     ),
     
-    // Ruta 3: Crear nota
+    // crear nota
     GoRoute(
       path: '/note/create',
       name: 'note-create',
       builder: (context, state) => const NoteFormScreen(),
     ),
     
-    // Ruta 4: Editar nota
+    // editar nota
     GoRoute(
       path: '/note/:id/edit',
       name: 'note-edit',
@@ -30,7 +30,7 @@ final appRouter = GoRouter(
         return NoteFormScreen(noteId: id);
       },
     ),
-    // Ruta 2: Detalle de nota (Deep link compatible)
+    // detalle de nota (Deep link compatible)
     GoRoute(
       path: '/note/:id',
       name: 'note-detail',

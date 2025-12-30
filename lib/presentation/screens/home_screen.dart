@@ -19,12 +19,11 @@ class HomeScreen extends ConsumerWidget {
         centerTitle: true,
         automaticallyImplyLeading: true,
         elevation: 0,
-        animateColor: true,
       ),
       body: notesAsync.when(
         data: (notes) {
           if (notes.isEmpty) {
-            return _EmptyState();
+            return const _EmptyState();
           }
           return _CardsState(notes: notes);
         },
@@ -35,9 +34,14 @@ class HomeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push('/note/create'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
         icon: const Icon(Icons.add),
-        label: const Text('Nueva Nota'),
+        label: const Text('Nueva nota'),
       ),
+
+
     );
   }
 }
@@ -46,6 +50,8 @@ class HomeScreen extends ConsumerWidget {
 
 //componentes privados
 class _EmptyState extends StatelessWidget {
+  // ignore: unused_element_parameter
+  const _EmptyState({super.key});
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -81,16 +87,24 @@ class _EmptyState extends StatelessWidget {
 
 // Grid de las notas 
 class _CardsState extends StatelessWidget {
-  final dynamic notes;
-  const _CardsState({required this.notes});
+  final List<dynamic> notes;
+  // ignore: unused_element_parameter
+  const _CardsState({super.key,required this.notes});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         // Responsive: cambia columnas según ancho
-        int crossAxisCount = constraints.maxWidth > 600 ? 3 : 2;
-        
+        int crossAxisCount = 1;
+        double size = constraints.maxWidth;
+        if(size > 800){
+          crossAxisCount = 4;
+        }else if(size > 600){
+          crossAxisCount = 3;
+        }else if(size >300){
+          crossAxisCount = 2;
+        }
         return GridView.builder(
           padding: const EdgeInsets.all(16),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -102,7 +116,10 @@ class _CardsState extends StatelessWidget {
           itemCount: notes.length,
           itemBuilder: (context, index) {
             final note = notes[index];
-            return _NoteCard(note: note);
+            return _NoteCard(
+              key: ValueKey(note.id),  
+              note: note
+            );
           },
         );
       },
@@ -117,15 +134,18 @@ class _CardsState extends StatelessWidget {
 class _NoteCard extends StatelessWidget {
   final dynamic note;
 
-  const _NoteCard({required this.note});
+  const _NoteCard({super.key,required this.note});
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      
       elevation: 2,
       child: InkWell(
         onTap: () => context.push('/note/${note.id}'),
         borderRadius: BorderRadius.circular(12),
+        //hoverColor: Color.fromARGB(112, 9, 126, 38),
+        //onLongPress: () => Clip.none,//cambio a futuro
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(

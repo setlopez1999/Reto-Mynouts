@@ -1,16 +1,140 @@
-# mynouts
+# 📝 MyNouts - Aplicación de Notas con Flutter
 
-A new Flutter project.
+![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?logo=dart)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## Getting Started
+Una aplicación moderna de gestión de notas desarrollada con Flutter, que implementa arquitectura limpia y las mejores prácticas del ecosistema Flutter moderno.
 
-This project is a starting point for a Flutter application.
+## 📸 Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+![Login](assets/gifs/ani2.gif)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Notes](assets/gifs/ani1.gif)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✨ Características
+
+- ✅ **CRUD Completo**: Crear, leer, actualizar y eliminar notas
+- 📱 **Diseño Responsive**: Adaptable a móvil, tablet y desktop
+- 🎨 **Material Design 3**: Interfaz moderna con tema oscuro
+- 💾 **Persistencia Local**: Los datos se guardan en SQLite
+- 🔗 **Deep Links**: Soporte completo para enlaces profundos
+- ⚡ **Tiempo Real**: Actualización automática de la UI con Streams
+- 🎯 **Estado Global**: Gestión eficiente con Riverpod
+
+## 🏗️ Arquitectura
+
+El proyecto sigue una arquitectura en capas con separación clara de responsabilidades:
+
+```
+lib/
+├── main.dart                    # Punto de entrada y configuración
+├── data/
+│   └── database/               # Capa de datos (Drift + SQLite)
+├── providers/                  # Estado global (Riverpod)
+├── presentation/
+│   └── screens/               # UI (Pantallas)
+└── router/                    # Navegación (GoRouter)
+```
+
+### 📊 Flujo de Datos
+
+```
+UI (Presentation) → Riverpod (Providers) → Database (Data) → SQLite
+```
+
+## 🛠️ Tecnologías Utilizadas
+
+| Tecnología | Propósito | Versión |
+|------------|-----------|---------|
+| **Flutter** | Framework UI | 3.0+ |
+| **Riverpod** | Gestión de estado | ^2.4.0 |
+| **GoRouter** | Navegación declarativa | ^13.0.0 |
+| **Drift** | ORM para SQLite | ^2.14.0 |
+| **Google Fonts** | Tipografía | ^6.1.0 |
+
+## 🚀 Instalación
+
+1. **Clona el repositorio**
+   ```bash
+   git clone https://github.com/setlopez1999/Reto-Mynouts.git
+   cd Reto-Mynouts
+   ```
+
+2. **Instala las dependencias**
+   ```bash
+   flutter pub get
+   ```
+
+3. **Genera el código de Drift**
+   ```bash
+   dart run build_runner build --delete-conflicting-outputs
+   ```
+
+4. **Ejecuta la aplicación**
+   ```bash
+   flutter run
+   ```
+
+## 📱 Plataformas Soportadas 
+
+- ✅ Android - (Verificado)
+- 🛠️ iOS
+- 🛠️ Web
+- 🛠️ Windows
+
+## 🗺️ Rutas de Navegación
+
+| Ruta | Pantalla | Descripción |
+|------|----------|-------------|
+| `/` | HomeScreen | Lista de todas las notas |
+| `/note/create` | NoteFormScreen | Crear nueva nota |
+| `/note/:id` | NoteDetailScreen | Ver detalle de nota (Deep Link) |
+| `/note/:id/edit` | NoteFormScreen | Editar nota existente |
+
+## 🏛️ Arquitectura Detallada
+
+### Capa de Datos (`data/`)
+- **Responsabilidad**: Comunicación con SQLite
+- **Componentes**:
+  - `app_database.dart`: Implementación del CRUD
+  - `tables.dart`: Definición del schema
+  - `app_database.g.dart`: Código generado por Drift
+
+### Capa de Providers (`providers/`)
+- **Responsabilidad**: Estado global reactivo
+- **Providers**:
+  - `databaseProvider`: Singleton de AppDatabase
+  - `notesStreamProvider`: Stream de todas las notas
+  - `noteProvider.family`: Stream de nota específica por ID
+
+### Capa de Presentación (`presentation/`)
+- **Responsabilidad**: Interfaz de usuario
+- **Pantallas**:
+  - `home_screen.dart`: Grid responsive de notas
+  - `note_detail_screen.dart`: Vista completa de una nota
+  - `note_form_screen.dart`: Formulario crear/editar
+
+### Capa de Router (`router/`)
+- **Responsabilidad**: Navegación declarativa
+- **Características**: Deep links, rutas tipadas, parámetros en URL
+
+
+## 📄 LICENCIA
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👤 AUTOR
+
+**Set Lopez**
+- GitHub: [@setlopez1999](https://github.com/setlopez1999)
+
+## 🙏 Agradecimientos
+
+- Proyecto desarrollado como parte de un reto técnico para FractalUp
+- Inspirado en las mejores prácticas de la comunidad Flutter
+
+---
+
+⭐ Si te gustó este reto, ¡dame una estrella en GitHub!
+

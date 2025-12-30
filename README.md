@@ -74,7 +74,7 @@ UI (Presentation) → Riverpod (Providers) → Database (Data) → SQLite
    flutter run
    ```
 
-## 📱 Plataformas Soportadas DDDDDDDDDDDDDDDDDDDDDDD
+## 📱 Plataformas Soportadas 
 
 - ✅ Android - (Verificado)
 - 🛠️ iOS
@@ -116,24 +116,6 @@ UI (Presentation) → Riverpod (Providers) → Database (Data) → SQLite
 ### Capa de Router (`router/`)
 - **Responsabilidad**: Navegación declarativa
 - **Características**: Deep links, rutas tipadas, parámetros en URL
-
-## 🎯 Decisiones Técnicas
-
-### ¿Por qué Riverpod?
-- Gestión de estado moderna y type-safe
-- Mejor testabilidad que Provider clásico
-- Reactividad automática con Streams
-
-### ¿Por qué Drift?
-- Type-safe queries en compile-time
-- Migraciones automáticas
-- Excelente performance con SQLite
-
-### ¿Por qué GoRouter?
-- Navegación declarativa
-- Soporte nativo de deep links
-- Integración perfecta con Material 3
-
 
 
 ## 📄 LICENCIA

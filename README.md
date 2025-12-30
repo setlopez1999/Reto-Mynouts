@@ -8,9 +8,9 @@ Una aplicación moderna de gestión de notas desarrollada con Flutter, que imple
 
 ## 📸 Screenshots
 
-![Login](assets/gifs/ani2.gif)
+![Login](lib/assets/gifs/ani2.gif)
 
-![Notes](assets/gifs/ani1.gif)
+![Notes](lib/assets/gifs/ani1.gif)
 
 ## ✨ Características
 

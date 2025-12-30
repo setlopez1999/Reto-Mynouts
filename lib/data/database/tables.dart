@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-// Tabla de notas
+// Tabli de notas
 class Notes extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get title => text().withLength(min: 1, max: 200)();

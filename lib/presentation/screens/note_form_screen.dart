@@ -54,12 +54,15 @@ class _NoteFormScreenState extends ConsumerState<NoteFormScreen> {
           children: [
             // Campo Título
             TextFormField(
+              style: const TextStyle(color: Colors.white),
               controller: _titleController,
               decoration: const InputDecoration(
                 labelText: 'Título',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.title),
+                
               ),
+              
               textCapitalization: TextCapitalization.sentences,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
@@ -75,6 +78,7 @@ class _NoteFormScreenState extends ConsumerState<NoteFormScreen> {
             
             // Campo Contenido
             TextFormField(
+              style: const TextStyle(color: Colors.white),
               controller: _contentController,
               decoration: const InputDecoration(
                 labelText: 'Contenido',

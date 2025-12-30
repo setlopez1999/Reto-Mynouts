@@ -25,6 +25,7 @@ dependencies:
   
   # UI
   cupertino_icons: ^1.0.8
+  google_fonts: ^6.3.3
 
   # Exp e imp de notas
   file_picker: ^10.3.8

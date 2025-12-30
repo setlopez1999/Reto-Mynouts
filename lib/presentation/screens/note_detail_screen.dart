@@ -29,65 +29,22 @@ class NoteDetailScreen extends ConsumerWidget {
         ],
       ),
       body: noteAsync.when(
-        data: (note) {
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Título
-                Text(
-                  note.title,
-                  style: const TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                
-                // Fecha
-                Text(
-                  'Actualizado: ${_formatDate(note.updatedAt)}',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
-                ),
-                const Divider(height: 32),
-                
-                // Contenido
-                Text(
-                  note.content,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    height: 1.5,
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+        data: (note) { return _DetailNoteWidget(note: note); },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.red),
-              const SizedBox(height: 16),
-              Text('Error: $error'),
-            ],
-          ),
-        ),
+        error: (error, stack) => _NoteNotFoundWidget(),
       ),
     );
   }
 
+
+
+  // CConfirmación de borrado de nota
   void _showDeleteDialog(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('¿Eliminar nota?'),
-        content: const Text('Esta acción no se puede deshacer.'),
+        title: const Text('¿Eliminar nota?', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+        content: const Text('Esta acción no se puede deshacer.', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -112,7 +69,75 @@ class NoteDetailScreen extends ConsumerWidget {
     );
   }
 
-  String _formatDate(DateTime date) {
-    return '${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
+}
+
+String _formatDate(DateTime date) {
+  return '${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
+}
+
+class _DetailNoteWidget extends StatelessWidget {
+
+  final dynamic note;
+  const _DetailNoteWidget({required this.note});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Título
+          Text(
+            note.title,
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          
+          // Fecha
+          Text(
+            'Actualizado: ${_formatDate(note.updatedAt)}',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey[600],
+            ),
+          ),
+          const Divider(height: 32),
+          
+          // Contenido
+          Text(
+            note.content,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.5,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NoteNotFoundWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.note_outlined, size: 64, color: Colors.grey),
+          SizedBox(height: 16),
+          Text(
+            'Nota no encontrada',
+            style: TextStyle(fontSize: 18, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
   }
 }

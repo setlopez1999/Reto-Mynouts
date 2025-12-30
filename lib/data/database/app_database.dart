@@ -19,7 +19,7 @@ class AppDatabase extends _$AppDatabase {
     return await into(notes).insert(note);
   }
 
-  // CRUD - READ (todas las notas)
+  // CRUD - READ de todas las tarjetas
   Stream<List<Note>> watchAllNotes() {
     return (select(notes)
           ..orderBy([
@@ -28,7 +28,7 @@ class AppDatabase extends _$AppDatabase {
         .watch();
   }
 
-  // CRUD - READ (una nota por ID)
+  // CRUD - READ de una sola por id
   Stream<Note> watchNote(int id) {
     return (select(notes)..where((t) => t.id.equals(id))).watchSingle();
   }
@@ -43,7 +43,8 @@ class AppDatabase extends _$AppDatabase {
     return await (delete(notes)..where((t) => t.id.equals(id))).go();
   }
 }
-
+// Conexión a la base de datos
+// Usando LazyDatabase para abrir la conexión cuando sea necesario
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
